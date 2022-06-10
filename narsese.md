@@ -47,13 +47,7 @@ public:
     Term() {}
     Term(char* _word, bool do_hashing=false, bool is_input=false);
     Term(string _word, bool do_hashing, bool is_input);
-
-    inline unsigned int do_hashing()
-    {
-        hash_value = hash_str(word);
-        is_hashed = true;
-        return hash_value;
-    }
+    // ...
 };
 ```
 {% endcode %}
