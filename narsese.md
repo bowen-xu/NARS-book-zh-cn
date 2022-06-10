@@ -12,6 +12,24 @@
 
 在英文场景下，词语是指字母表中的字符构成的字符串，在中文场景下，词语是指汉字构成的字符串。例如，“乌鸦”、“企鹅”、“鸟”、“动物”、“raven”、“penguin” 、“bird”、“animal”等都是原子词项。
 
+{% code title="Narsese/Term.py" %}
+```python
+class Term:
+    type = TermType.ATOM
+pyt    # ...
+    
+    def __init__(self, word, do_hashing=False, word_sorted=None, is_input=False) -> None:
+        self.word = word
+        # ...
+        
+        if do_hashing:
+            self.do_hashing()
+        else:
+            self._hash_value = None
+        
+```
+{% endcode %}
+
 词项以某种方式组织起来形成陈述，正如词语以某种方式组织起来形成语句：
 
 > **定义2.2.** _一阶陈述_(first-order statement)是的形式是“$$S 系词 P$$”，其中系词(copula) 的含义是两个原子词项之间的关系。系词前的原子词项$$S$$称为主项(subject term或subject)，系词后的原子词项$$P$$被称为谓项(predicate term或predicate)。
