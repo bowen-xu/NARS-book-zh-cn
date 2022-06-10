@@ -12,11 +12,13 @@
 
 在英文场景下，词语是指字母表中的字符构成的字符串，在中文场景下，词语是指汉字构成的字符串。例如，“乌鸦”、“企鹅”、“鸟”、“动物”、“raven”、“penguin” 、“bird”、“animal”等都是原子词项。
 
+{% tabs %}
+{% tab title="Python" %}
 {% code title="Narsese/Term.py" %}
 ```python
 class Term:
     type = TermType.ATOM
-pyt    # ...
+    # ...
     
     def __init__(self, word, do_hashing=False, word_sorted=None, is_input=False) -> None:
         self.word = word
@@ -26,9 +28,49 @@ pyt    # ...
             self.do_hashing()
         else:
             self._hash_value = None
-        
 ```
 {% endcode %}
+{% endtab %}
+
+{% tab title="C++" %}
+{% code title="Narsese/Term.h" %}
+```cpp
+class Term
+{
+public:
+    TermType type = TermType::ATOM;
+    // ...
+    
+public:
+    Term() {}
+    Term(char* _word, bool do_hashing=false, bool is_input=false);
+    Term(string _word, bool do_hashing, bool is_input);
+
+    inline unsigned int do_hashing()
+    {
+        hash_value = hash_str(word);
+        is_hashed = true;
+        return hash_value;
+    }
+};
+```
+{% endcode %}
+
+{% code title="Narsese/Term.cpp" %}
+```cpp
+Term::Term(char *_word, bool do_hashing, bool is_input) : Term(string(_word), do_hashing, is_input) {}
+
+Term::Term(string _word, bool _do_hashing, bool is_input): word(_word)
+{
+    if (_do_hashing)
+    {
+        do_hashing();
+    }
+}
+```
+{% endcode %}
+{% endtab %}
+{% endtabs %}
 
 词项以某种方式组织起来形成陈述，正如词语以某种方式组织起来形成语句：
 
