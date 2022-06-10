@@ -7,4 +7,4 @@
 * [四、推理控制](controller.md)
 * [五、讨论](discussion.md)
 * [附录I：中英文术语对照](appendix-glossary.md)
-* [贡献者](gong-xian-zhe.md)
+* [贡献者](contributors.md)
