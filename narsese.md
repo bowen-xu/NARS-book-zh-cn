@@ -12,6 +12,8 @@
 
 在英文场景下，词语是指字母表中的字符构成的字符串，在中文场景下，词语是指汉字构成的字符串。例如，“乌鸦”、“企鹅”、“鸟”、“动物”、“raven”、“penguin” 、“bird”、“animal”等都是原子词项。
 
+原子词项的代码实现如下。类`Term`的成员变量`type`记录了词项的类型，`type`为`Atom`表示该词项为原子词项。类`Term`的成员变量`word`记录了定义2.1中所述的“词语”。为了方便词项被进一步处理，每个词项由一个哈希值`hash_value`唯一标记，该哈希值是通过对字符串`word`的哈希计算得到。
+
 {% tabs %}
 {% tab title="Python" %}
 {% code title="Narsese/Term.py" %}
@@ -19,7 +21,7 @@
 class Term:
     type = TermType.ATOM
     # ...
-    
+        
     def __init__(self, word, do_hashing=False, word_sorted=None, is_input=False) -> None:
         self.word = word
         # ...
@@ -71,6 +73,8 @@ Term::Term(string _word, bool _do_hashing, bool is_input): word(_word)
 {% endcode %}
 {% endtab %}
 {% endtabs %}
+
+
 
 词项以某种方式组织起来形成陈述，正如词语以某种方式组织起来形成语句：
 
