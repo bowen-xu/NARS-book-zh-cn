@@ -1,6 +1,7 @@
 # Table of contents
 
-* [一、简介](README.md)
+* [简介](README.md)
+* [一、引言](<README (1).md>)
 * [二、知识表示](narsese.md)
 * [三、逻辑规则](logic.md)
 * [四、推理控制](controller.md)
