@@ -68,11 +68,68 @@ Term::Term(string _word, bool _do_hashing, bool is_input): word(_word)
 {% endtab %}
 {% endtabs %}
 
+<details>
+
+<summary>创建词项的方法</summary>
+
+通过例如以下代码，即可创建一个原子词项
+
+Python:
+
+```python
+from Narsese import Term
+term = Term("bird")
+print(term)
+```
+
+C++:
+
+```cpp
+#include "Narsese/Term.h"
+using TERM::Term;
+term = Term("bird");
+std::cout << term.word << endl;
+```
+
+</details>
+
 
 
 词项以某种方式组织起来形成陈述，正如词语以某种方式组织起来形成简单的语句：
 
 > **定义2.2.** 陈述(statement)是的形式是“$$S 系词 P$$”，其中系词(copula) 的含义是两个词项之间的关系。系词前的原子词项$$S$$被称为主项(subject term或subject)，系词后的词项$$P$$被称为谓项(predicate term或predicate)。
+
+{% tabs %}
+{% tab title="Python" %}
+{% code title="Narsese/Statement.py" %}
+```python
+class Statement(Term):
+    type = TermType.STATEMENT
+    
+    def __init__(self, subject: Term, copula: Copula, predicate: Term, is_input: bool=False) -> None:
+        self._is_commutative = copula.is_commutative
+        word = "<"+str(subject)+str(copula.value)+str(predicate)+">"
+        if self.is_commutative:
+            subject_word, predicate_word = sorted((subject, predicate), key=hash)
+            word_sorted = "<"+subject_word.word_sorted+str(copula.value)+predicate_word.word_sorted+">"
+        else: word_sorted = "<"+subject.word_sorted+str(copula.value)+predicate.word_sorted+">"
+
+        self.subject = subject
+        self.copula = copula
+        self.predicate = predicate
+
+```
+{% endcode %}
+{% endtab %}
+
+{% tab title="C++" %}
+
+{% endtab %}
+{% endtabs %}
+
+
+
+
 
 复合词项被定义来描述单个或多个词项之间的关系，例如交集关系、并集关系、差集关系等。
 
